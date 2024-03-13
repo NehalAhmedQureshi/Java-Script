@@ -17,7 +17,7 @@ else if(sure == 2){
     document.write("This is your second value : ");
     document.write(d , "<br>");
     document.write("This is your answer : ");
-    document.write(a-b);
+    document.write(c-d);
 }
 else if(sure == 3){
     var e = +prompt("First number would you like to multiple");
