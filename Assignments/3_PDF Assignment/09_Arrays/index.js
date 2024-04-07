@@ -94,3 +94,15 @@ let selectedCities =(cities.slice(1,4))
 
 printCityName.innerHTML = citiesName;
 printSelectedCity.innerHTML = selectedCities;
+
+//  ******************************** Question 12 *********************************
+
+let varible = ['This','is','an','array']
+console.log(varible);
+
+console.log(varible.join(" "));
+
+//  ******************************** Question 15 *********************************
+
+let phoneStore = ['Apple','Samsung','Nokia','Motrolla','Sony'];
+document.getElementById("phone").innerHTML = phoneStore
