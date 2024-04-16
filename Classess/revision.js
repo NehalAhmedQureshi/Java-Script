@@ -1,7 +1,7 @@
 //  ********************************* Array **************************************
 
-let myArray = ["Mango", "Banana", "Grapes", "Orange", "Watermelon", "Gavava", "Blueberry"]
-console.log(myArray);
+// let myArray = ["Mango", "Banana", "Grapes", "Orange", "Watermelon", "Gavava", "Blueberry"]
+// console.log(myArray);
 //************************ */--------- show myArray elements--------
 
 // console.log(myArray);
@@ -65,3 +65,26 @@ console.log(myArray);
 // for (let odd = 0; odd <= 40; odd += 2) {
 //     console.log("This is odd Number :", odd + 1);
 // }
+
+//''''''''''''''''''''===16-April-2024-Tuesday-=====''''''''''''''''''''''''//
+
+let name = [' Nehal',' Shehzad',' Saif'];
+
+for (let i = 0; i < name.length; i++) {
+    console.log((i+1) + name[i]);
+}
+
+let myArray = [
+    [2,3,2,3,],
+    [4,5,6,7],
+    [3.9,7,8],
+    [4,7,6,7]
+]
+console.log(myArray);
+
+for (let i = 0; i < 2; i++) {
+    console.log('First loop');
+    for (let j = 0; j < 3; j++) {
+        console.log('loop is running');
+    } 
+}
