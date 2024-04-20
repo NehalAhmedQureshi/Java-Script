@@ -23,3 +23,24 @@ for (let i = 0; i < 3 ; i++) {
     }
     
 }
+
+
+// ----------------------------------- 20 april ------------------------------
+
+let array = ['ali','nehal','ahmed']
+
+// for (let i = 0; i < array.length; i++) {
+//     console.log(array[i][0].toUpperCase() + array[i].slice(1));    
+// }
+
+/////////////////////// split ///////////////////
+
+let string = 'mY naMe Is nEhal'
+string = string.toLowerCase()
+
+let words = string.split(' ');
+// console.log(words);
+
+for (let i = 0; i < words.length; i++) {
+    console.log(words[i][0].toUpperCase() + words[i].slice(1)) ;
+}
