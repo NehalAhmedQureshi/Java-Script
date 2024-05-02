@@ -50,3 +50,25 @@ let sun =  (a,b)  => a + b
 console.log(sun(4,5));
 
 // -------------------------------------- fast running function --------------------------
+
+(function (){
+      console.log('heloo');
+})()
+
+// -------------------------------------- Rest Function ----------------------------------
+let multiply = 1
+function trying(...c){
+
+      
+      // console.log(c.length);
+      // console.log(c);
+
+      for (let i = 0; i < c.length; i++) {
+            multiply *= c[i]
+      }
+      return multiply
+}
+
+console.log(trying(2,4,5,6,7,8,9));
+
+
