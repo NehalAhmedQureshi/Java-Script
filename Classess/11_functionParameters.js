@@ -21,3 +21,10 @@ function average(myArray) {
 
 console.log(average([2,4,5,6,7,6]));
 console.log(average([2,4,5,6,7,6,10 , 40,100,1000]));
+
+// let sum = (a,b) => {
+//       return a+ b
+// }                               
+
+// console.log(sum(5));                    // -------------------- return ------------------ Nan
+
