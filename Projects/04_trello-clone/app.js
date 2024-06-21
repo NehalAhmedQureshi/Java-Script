@@ -32,12 +32,14 @@ for (let i = 0; i < cards.length; i++) {
 }
 
 const createTasks = (value) => {
-    const task = document.createElement('p');
+    const task = document.createElement('div');
     const text = document.createTextNode(value);
     const trashIcon = document.createElement('i')
-    trashIcon.setAttribute('draggable', 'true')
+    // trashIcon.setAttribute('draggable', 'true')
     trashIcon.classList.add('fa-solid')
     trashIcon.classList.add('fa-trash')
+    trashIcon.classList.add('trash')
+
 
     task.setAttribute('draggable', 'true');
     task.classList.add('tasks');
