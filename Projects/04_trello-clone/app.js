@@ -4,16 +4,29 @@ const cardHolder = document.querySelector('.cardHolder');
 const tasks = document.querySelectorAll('.tasks');
 
 // ------------------------------ Save object to local storage
+let savedTasks = JSON.parse(localStorage.getItem("savedTasks"))
 
 const deleteTasks = (event) => {
+
     event.preventDefault();
     const clickTrash = event.target;
-    const trashParent = clickTrash.parentElement;
+
+    const trashParent = clickTrash.parentElement;  // get those div which delete icon clicks
+    
+    const trashValue = trashParent.children[0].innerHTML // div para value of clicks delete icon
+
+    const trashValueIndex = savedTasks.indexOf(trashValue) /// find index of those trash value 
+
+    const remove = savedTasks.splice(trashValueIndex , 1); // remove element 
+
+    localStorage.setItem('savedTasks' , JSON.stringify(savedTasks)) // save this new array to local storage
+
     trashParent.remove(); // Remove the task element
 };
 
 const createTasks = (value) => {
     const task = document.createElement('div');
+    const para = document.createElement('p')
     const text = document.createTextNode(value);
     const trashIcon = document.createElement('i');
 
@@ -22,16 +35,16 @@ const createTasks = (value) => {
     task.setAttribute('draggable', 'true');
     task.classList.add('tasks');
 
-    task.appendChild(text);
+    para.appendChild(text)
+    task.appendChild(para);
     task.appendChild(trashIcon);
 
     trashIcon.addEventListener('click', deleteTasks); // Add delete event listener to the trash icon
     return task;
 };
 
-let savedTasks = JSON.parse(localStorage.getItem("savedTasks"))
 
-console.log(cards[0].lastElementChild.children[0]);
+// console.log(cards[0].lastElementChild.children[0]);
 if (!savedTasks) {
     savedTasks = []
 }
@@ -66,6 +79,7 @@ let addTask = (event) => {
 
             activeForm.reset(); // clearing form
     }
+            
 
     // if (inputValue.trim() !== "") {
     //     const ticket = createTasks(inputValue); // div to be added
@@ -91,16 +105,13 @@ const addNewCard = (event) => {
 
     const input = addCardBtn.querySelector('input');
     const cardTitle = input.value;
-    const cardNames = JSON.parse(localStorage.getItem('cardNames')) || [];
 
     if (cardTitle.trim() !== "") {
-        cardNames.push(cardTitle);
-        localStorage.setItem('cardNames', JSON.stringify(cardNames));
-
         const newCard = createCard(cardTitle);
         cardHolder.insertBefore(newCard, addCardBtn);
         input.value = ''; // clear input field
     }
+    
 };
 
 addCardBtn.querySelector('form').addEventListener('submit', addNewCard);

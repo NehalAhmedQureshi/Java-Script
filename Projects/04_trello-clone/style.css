@@ -172,11 +172,14 @@ li.dropdown {
   padding: 8px;
   font-size: 14px;
   font-weight: 400;
-  margin-bottom: 0%;
+  /* margin-bottom: 0%; */
   display: flex;
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
+}
+.tasks p {
+  margin-bottom: 0%;
 }
 .tasks i {
   font-size: 14px;
