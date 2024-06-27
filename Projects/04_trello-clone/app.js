@@ -12,14 +12,14 @@ const deleteTasks = (event) => {
     const clickTrash = event.target;
 
     const trashParent = clickTrash.parentElement;  // get those div which delete icon clicks
-    
+
     const trashValue = trashParent.children[0].innerHTML // div para value of clicks delete icon
 
     const trashValueIndex = savedTasks.indexOf(trashValue) /// find index of those trash value 
 
-    const remove = savedTasks.splice(trashValueIndex , 1); // remove element 
+    const remove = savedTasks.splice(trashValueIndex, 1); // remove element 
 
-    localStorage.setItem('savedTasks' , JSON.stringify(savedTasks)) // save this new array to local storage
+    localStorage.setItem('savedTasks', JSON.stringify(savedTasks)) // save this new array to local storage
 
     trashParent.remove(); // Remove the task element
 };
@@ -46,14 +46,14 @@ const createTasks = (value) => {
 
 // console.log(cards[0].lastElementChild.children[0]);
 if (!savedTasks) {
-    savedTasks = []
+    savedTasks = {}
 }
 // console.log();
-for (let i = 0; i < savedTasks.length; i++) {
-    const p = createTasks(savedTasks[i])
+// for (let i = 0; i < savedTasks[nehal].length; i++) {
+//     const p = createTasks(savedTasks[nehal][i])
 
-    cards[0].lastElementChild.insertBefore(p , cards[0].lastElementChild.lastElementChild);
-}
+//     cards[0].lastElementChild.insertBefore(p , cards[0].lastElementChild.lastElementChild);
+// }
 
 
 // for (let i = 0; i < cards.length; i++){
@@ -68,18 +68,23 @@ let addTask = (event) => {
     const activeForm = event.target; // current form element
     const inputValue = activeForm[0].value; // value written in form's input
     const parent = activeForm.parentElement; // parent of form i.e div.column
+    const h3Value = parent.parentElement.children[0].children[0].innerHTML
+    console.log("🚀 ~ addTask ~ h3Value:", h3Value)
 
+    if (!savedTasks[h3Value]) {
+        savedTasks[h3Value] = []
+    }
 
 
     if (inputValue.trim() !== '') {
-            const ticket1 = createTasks(inputValue)
-            parent.insertBefore(ticket1, activeForm); // adding new task before the form
-            savedTasks.push(inputValue);
-            localStorage.setItem('savedTasks',JSON.stringify(savedTasks))
+        const ticket1 = createTasks(inputValue)
+        parent.insertBefore(ticket1, activeForm); // adding new task before the form
+        savedTasks[h3Value].push(inputValue);
+        localStorage.setItem('savedTasks', JSON.stringify(savedTasks))
 
-            activeForm.reset(); // clearing form
+        activeForm.reset(); // clearing form
     }
-            
+
 
     // if (inputValue.trim() !== "") {
     //     const ticket = createTasks(inputValue); // div to be added
@@ -97,25 +102,6 @@ for (let i = 0; i < cards.length; i++) {
     const form = cards[i].querySelector('form'); // selecting each column's form
     form.addEventListener('submit', addTask);
 }
-
-
-
-const addNewCard = (event) => {
-    event.preventDefault();
-
-    const input = addCardBtn.querySelector('input');
-    const cardTitle = input.value;
-
-    if (cardTitle.trim() !== "") {
-        const newCard = createCard(cardTitle);
-        cardHolder.insertBefore(newCard, addCardBtn);
-        input.value = ''; // clear input field
-    }
-    
-};
-
-addCardBtn.querySelector('form').addEventListener('submit', addNewCard);
-
 const createCard = (cardHeading) => {
     const card = document.createElement('div');
     card.classList.add('cards');
@@ -150,6 +136,49 @@ const createCard = (cardHeading) => {
 
     return card;
 };
+
+let cardNameArray;  // initialize an array for store all card names
+if (!cardNameArray) { // for put an empty array 
+    cardNameArray = []
+}
+
+const objectLength = Object.keys(savedTasks).length;  // length of object
+// console.log("🚀 ~ objectLength:", objectLength)
+
+for (const x in savedTasks) {  // get object keys from savedTasks
+
+    cardNameArray.push(x)
+
+}
+console.log("🚀 ~ cardNameArray:", cardNameArray)
+
+for (let i = 0; i < objectLength; i++) {
+
+    const xyz = createCard(cardNameArray[i])
+    console.log("🚀 ~ xyz:", xyz)
+    cardHolder.insertBefore(xyz, addCardBtn)
+
+}
+
+
+
+const addNewCard = (event) => {
+    event.preventDefault();
+
+    const input = addCardBtn.querySelector('input');
+    const cardTitle = input.value;
+
+    if (cardTitle.trim() !== "") {
+        const newCard = createCard(cardTitle);
+        cardHolder.insertBefore(newCard, addCardBtn);
+        input.value = ''; // clear input field
+    }
+
+};
+
+addCardBtn.querySelector('form').addEventListener('submit', addNewCard);
+
+
 
 
 
