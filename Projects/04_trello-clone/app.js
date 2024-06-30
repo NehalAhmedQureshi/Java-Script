@@ -12,12 +12,16 @@ const deleteTasks = (event) => {
     const clickTrash = event.target;
 
     const trashParent = clickTrash.parentElement;  // get those div which delete icon clicks
+    
+    const cardName = trashParent.parentElement.parentElement.children[0].children[0].innerHTML
+    console.log("🚀 ~ deleteTasks ~ cardName:", cardName)
 
     const trashValue = trashParent.children[0].innerHTML // div para value of clicks delete icon
 
-    const trashValueIndex = savedTasks.indexOf(trashValue) /// find index of those trash value 
+    const trashValueIndex = savedTasks[cardName].indexOf(trashValue) /// find index of trash value 
+    console.log("🚀 ~ deleteTasks ~ trashValueIndex:", trashValueIndex)
 
-    const remove = savedTasks.splice(trashValueIndex, 1); // remove element 
+    const remove = savedTasks[cardName].splice(trashValueIndex, 1); // remove element 
 
     localStorage.setItem('savedTasks', JSON.stringify(savedTasks)) // save this new array to local storage
 
@@ -93,6 +97,8 @@ let addTask = (event) => {
     // }
 };
 
+
+
 // Attach event listener to card creator form
 cardHolder.addEventListener('click', (event) => {
     event.preventDefault();
@@ -105,7 +111,7 @@ for (let i = 0; i < cards.length; i++) {
 const createCard = (cardHeading) => {
     const card = document.createElement('div');
     card.classList.add('cards');
-
+    
     const cardNav = document.createElement('div');
     cardNav.classList.add('cardNav');
     const h6 = document.createElement('h6');
@@ -128,7 +134,7 @@ const createCard = (cardHeading) => {
     input.setAttribute('maxlength', '15');
     form.appendChild(input);
     cardHome.appendChild(form);
-
+    
     card.appendChild(cardNav);
     card.appendChild(cardHome);
 
@@ -136,6 +142,27 @@ const createCard = (cardHeading) => {
 
     return card;
 };
+
+// ---------- display tasks already saved in savedTasks
+for (const title in savedTasks) {
+
+    // console.log('title =>',title);
+    const card = createCard(title);
+    // console.log("🚀 ~ card:", card)
+  
+    const arrayOfTasks = savedTasks[title];
+    // console.log("🚀 ~ arrayOfTasks:", arrayOfTasks)
+  
+    for (let i = 0; i < arrayOfTasks.length; i++) {
+      const p = createTasks(arrayOfTasks[i]);// we are creating paras with each tasks
+    //   console.log('cards =>' , card.lastElementChild.lastElementChild);
+      card.lastElementChild.insertBefore(p, card.lastElementChild.lastElementChild);
+    }
+  
+    // console.log('card ----',card);
+    cardHolder.insertBefore(card, addCardBtn);
+  }
+
 
 let cardNameArray;  // initialize an array for store all card names
 if (!cardNameArray) { // for put an empty array 
@@ -145,20 +172,7 @@ if (!cardNameArray) { // for put an empty array
 const objectLength = Object.keys(savedTasks).length;  // length of object
 // console.log("🚀 ~ objectLength:", objectLength)
 
-for (const x in savedTasks) {  // get object keys from savedTasks
-
-    cardNameArray.push(x)
-
-}
-console.log("🚀 ~ cardNameArray:", cardNameArray)
-
-for (let i = 0; i < objectLength; i++) {
-
-    const xyz = createCard(cardNameArray[i])
-    console.log("🚀 ~ xyz:", xyz)
-    cardHolder.insertBefore(xyz, addCardBtn)
-
-}
+// for (const x  
 
 
 
