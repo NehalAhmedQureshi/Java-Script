@@ -149,26 +149,33 @@ const createCard = (cardHeading) => {
 
     form.addEventListener('submit', addTask);
 
-    card.style.border = '2px solid red'
+    // card.style.border = '2px solid red'
     card.addEventListener("dragleave", (event) => event.preventDefault());
     card.addEventListener("dragover", (event) => event.preventDefault());
   
     card.addEventListener("drop", (event) => {
       const jisElementPerDropKiyaJaRahaHo = event.target;
-      console.log("🚀 ~ cardHome.addEventListener ~ jisElementPerDropKiyaJaRahaHo:", jisElementPerDropKiyaJaRahaHo)
-  
-      if (jisElementPerDropKiyaJaRahaHo.className.includes("card")) {
-        // console.log("2");
-        jisElementPerDropKiyaJaRahaHo.appendChild(woElementJoUthaHuaHy);
-      }
+      console.log("🚀 ~ cardHome.addEventListener ~ jisElementPerDropKiyaJaRahaHo:", jisElementPerDropKiyaJaRahaHo.parentElement.parentElement.lastElementChild)
+      console.log('class name => ' , jisElementPerDropKiyaJaRahaHo.className);
       
-  
-      if (jisElementPerDropKiyaJaRahaHo.className.includes("tasks")) {
-        console.log('parent',jisElementPerDropKiyaJaRahaHo.parentElement.lastElementChild);
-        jisElementPerDropKiyaJaRahaHo.parentElement.insertBefore(
-            jisElementPerDropKiyaJaRahaHo,jisElementPerDropKiyaJaRahaHo.parentElement.lastElementChild
-        );
-      }
+    if(jisElementPerDropKiyaJaRahaHo.className == 'tasks'){
+
+            jisElementPerDropKiyaJaRahaHo.parentElement.insertBefore(woElementJoUthaHuaHy , jisElementPerDropKiyaJaRahaHo.parentElement.lastElementChild )
+
+        }else if (jisElementPerDropKiyaJaRahaHo.className == 'cardNav'){
+
+            jisElementPerDropKiyaJaRahaHo.nextSibling.insertBefore(woElementJoUthaHuaHy,jisElementPerDropKiyaJaRahaHo.parentElement.children[1].lastElementChild)
+            
+        }else if (jisElementPerDropKiyaJaRahaHo.tagName == 'INPUT'){
+
+            jisElementPerDropKiyaJaRahaHo.parentElement.parentElement.insertBefore(woElementJoUthaHuaHy,jisElementPerDropKiyaJaRahaHo.parentElement.parentElement.lastElementChild)
+            
+        }else if (jisElementPerDropKiyaJaRahaHo.className == 'cards'){
+
+            jisElementPerDropKiyaJaRahaHo.children[1].insertBefore(woElementJoUthaHuaHy,jisElementPerDropKiyaJaRahaHo.children[1].lastElementChild)
+            
+        }
+      
     });
 
     return card;
