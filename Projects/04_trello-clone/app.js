@@ -44,6 +44,15 @@ const createTasks = (value) => {
     task.appendChild(trashIcon);
 
     trashIcon.addEventListener('click', deleteTasks); // Add delete event listener to the trash icon
+
+    task.addEventListener("mousedown", (event) => {
+        // console.log("🚀 ~ task.addEventListener ~ woElementJoUthaHuaHy:", event.target.tagName)
+        if(event.target.tagName === "DIV"){
+            woElementJoUthaHuaHy = event.target;
+
+        }
+      });
+
     return task;
 };
 
@@ -139,6 +148,28 @@ const createCard = (cardHeading) => {
     card.appendChild(cardHome);
 
     form.addEventListener('submit', addTask);
+
+    card.style.border = '2px solid red'
+    card.addEventListener("dragleave", (event) => event.preventDefault());
+    card.addEventListener("dragover", (event) => event.preventDefault());
+  
+    card.addEventListener("drop", (event) => {
+      const jisElementPerDropKiyaJaRahaHo = event.target;
+      console.log("🚀 ~ cardHome.addEventListener ~ jisElementPerDropKiyaJaRahaHo:", jisElementPerDropKiyaJaRahaHo)
+  
+      if (jisElementPerDropKiyaJaRahaHo.className.includes("card")) {
+        // console.log("2");
+        jisElementPerDropKiyaJaRahaHo.appendChild(woElementJoUthaHuaHy);
+      }
+      
+  
+      if (jisElementPerDropKiyaJaRahaHo.className.includes("tasks")) {
+        console.log('parent',jisElementPerDropKiyaJaRahaHo.parentElement.lastElementChild);
+        jisElementPerDropKiyaJaRahaHo.parentElement.insertBefore(
+            jisElementPerDropKiyaJaRahaHo,jisElementPerDropKiyaJaRahaHo.parentElement.lastElementChild
+        );
+      }
+    });
 
     return card;
 };
